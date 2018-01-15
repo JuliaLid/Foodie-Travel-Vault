@@ -5,17 +5,100 @@
 	<title>Foodie Travel Vault</title>
 	<!-- jQuery CDN -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- Google API -->
+		<!-- <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&language=en"></script> -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnLxfKXctc_onIuEUEuYDrwUuBc0_eVfs&libraries=places&language=en"></script>
+	!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
 	<!-- Stylesheets -->
+	<link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.ico">
 	<link rel="stylesheet" href="assets/css/reset.css">
 	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-SJRp3lIuvy82g2roYNoSMWGEf7ufogthbl9noRHbJIxsMPcFl6NEi5fO3PuYptFv" crossorigin="anonymous">
-	<!-- In case we need to use FontAwesome -->
-	<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="assets/css/fonts/font/flaticon.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<!-- Firebase -->
-	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<!-- 	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script> -->
 </head>
-<body>
-	
-	<script src="assets/javascript/logic.js"></script>	
+<body id="bootstrap-override">
+	<!-- Jumbotron -->
+	<section class="jumbotron text-center">
+  			<h1 class="display-3"><span class="flaticon-restaurant-cutlery-circular-symbol-of-a-spoon-and-a-fork-in-a-circle"></span> Foodie Travel Vault</h1>
+		
+		<!-- Search form -->
+	   		<form class="form-inline justify-content-center">
+				<label class="sr-only" for="location">Location</label>
+			  	<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="location" placeholder="Enter City and State">
+
+				<label class="sr-only" for="restaurant-name">Restaurant Name</label>
+			  	<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="restaurant-name" placeholder="Enter Restaurant Name">
+
+			 	 <button id="search-button" type="submit" class="btn btn-primary">Add to Vault</button>
+			</form>
+    </section>
+<!-- Card deck for the Vault -->
+    <div class="album text-muted">
+    	<div class="container">
+        	<div class="row">
+	    		<div class="card-deck">
+						<div class="card mb-4">
+					  	<a href="https://www.google.com" target="_blank">
+					    <img class="card-img-top" src="assets/images/RPG.jpg" alt="Card image cap">
+					    <div class="card-body"> </a>
+					      <h4 class="card-title">Restaurant 1</h4>
+					      <h6>Address</h6>
+					      <p class="card-text">Sample, MN</p>
+					      <h6>Phone Number </h6>
+					      <p class="card-text">952-222-222</p>
+					      <h6>Rating </h6>
+					      <p class="card-text">4 stars</p>
+					     <button type="button" class="btn btn-primary btn-sm">Add Date</button>
+					    </div>
+
+					  </div>
+					  <div class="card mb-4">
+					    <a href="https://www.google.com" target="_blank">
+					    <img class="card-img-top" src="assets/images/Rutgers.jpg" alt="Card image cap"> </a>
+					    <div class="card-body">
+					      <h4 class="card-title">Restaurant 2</h4>
+					      <h6>Address</h6>
+					      <p class="card-text">Sample, MN</p>
+					      <h6>Phone Number </h6>
+					      <p class="card-text">952-222-222</p>
+					      <h6>Rating </h6>
+					      <p class="card-text">4 stars</p>
+					      <button type="button" class="btn btn-primary btn-sm">Add Date</button>
+					    </div>
+					  </div>
+					  <div class="card mb-4">
+					    <a href="https://www.google.com" target="_blank">
+					    <img class="card-img-top" src="assets/images/Hangman.jpg" alt="Card image cap"> </a>
+					    <div class="card-body">
+					      <h4 class="card-title">Restaurant 3</h4>
+					      <h6>Address</h6>
+					      <p class="card-text">Sample, MN</p>
+					      <h6>Phone Number </h6>
+					      <p class="card-text">952-222-222</p>
+					      <h6>Rating </h6>
+					      <p class="card-text">4 stars</p>
+					   	 <button type="button" class="btn btn-primary btn-sm">Add Date</button>
+					    </div>
+				 </div>
+			</div>
+        </div>
+     </div>
+   
+<!-- Footer -->
+	<footer class="text-muted">
+    	<div class="container">
+        	<p class="float-right">
+         		 <a href="#">Back to top</a>
+       		 </p>
+        	<p> University of Minnesota Full Stack Developement Bootcamp Project #1 &copy;</p>
+        	<p> Project Team: Julia Lidstrom, Jeffrey A. DuBois, Nathan Jahnke, Jennifer Kral</p>
+       		<p>View code on  <a href="https://github.com/JuliaLid/Foodie-Travel-Vault"> GitHub repo</a></p>
+     	 </div>
+    </footer>
+
+ 	<script src="assets/javascript/logic.js"></script>	
 </body>
 </html>

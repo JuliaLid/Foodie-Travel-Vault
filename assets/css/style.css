@@ -1,0 +1,87 @@
+body {
+  min-height: 75rem; /* Can be removed; just added for demo purposes */
+}
+
+/*.navbar {
+  margin-bottom: 0;
+}*/
+
+.display-3 {
+  padding-bottom: 2rem;
+  font-family: 'Acme', sans-serif;
+  letter-spacing: .2rem;
+}
+
+
+.jumbotron {
+ /* padding-top: 6rem;*/
+  padding-bottom: 15rem;
+  margin-bottom: 0;
+  background-color: #fff;
+  background-image: url("../images/jumbotron.jpeg");
+  /*background-size: 100% 100%;*/
+  background-position: center bottom;
+}
+
+
+.jumbotron p:last-child {
+  margin-bottom: 0;
+}
+
+.jumbotron-heading {
+  font-weight: 300;
+}
+
+.jumbotron .container {
+  max-width: 40rem;
+}
+
+}
+.album {
+  min-height: 50rem; /* Can be removed; just added for demo purposes */
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: #f7f7f7;
+}
+
+.card {
+  float: left;
+  width: 33.333%;
+  padding: .75rem;
+  margin-bottom: 2rem;
+  border: 0;
+  border: 1px #D3D3D3 solid;
+}
+
+.card > img {
+  margin-bottom: .75rem;
+}
+
+.card-text {
+  font-size: 85%;
+}
+
+.card-deck {
+  margin-top: 2rem;
+}
+
+.card-title {
+  text-align: center;
+  font-family: 'Acme', sans-serif;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: #D3D3D3;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}
+
+h1 {
+  font-family: 'Acme', sans-serif;
+  letter-spacing: .2rem;
+  font-size: 3rem;
+}
