@@ -1,17 +1,20 @@
 //Declare global variables
 
-// var database = firebase.database();
+
 
 //Initialize Firebase
-// var config = {
-//     apiKey: "AIzaSyCoyQsX5G0nDGZMT1fuYTk-PTQ1WSevBFw",
-//     authDomain: "foodie-travel-vault.firebaseapp.com",
-//     databaseURL: "https://foodie-travel-vault.firebaseio.com",
-//     projectId: "foodie-travel-vault",
-//     storageBucket: "foodie-travel-vault.appspot.com",
-//     messagingSenderId: "458792787291"
-//   };
-//   firebase.initializeApp(config);
+var config = {
+    apiKey: "AIzaSyCoyQsX5G0nDGZMT1fuYTk-PTQ1WSevBFw",
+    authDomain: "foodie-travel-vault.firebaseapp.com",
+    databaseURL: "https://foodie-travel-vault.firebaseio.com",
+    projectId: "foodie-travel-vault",
+    storageBucket: "foodie-travel-vault.appspot.com",
+    messagingSenderId: "458792787291"
+  };
+  firebase.initializeApp(config);
+
+ var database = firebase.database();
+
  var input = document.getElementById('location');
 
  var autocomplete = new google.maps.places.Autocomplete(input, {types: ['(cities)']});
@@ -37,19 +40,28 @@
           
         }); 
 
-    function retrieveAndDisplayRecordsViaYelpAPI() {
-     console.log("Entering retrieveAndDisplayRecordsViaYelpAPI");
+    function saveToFireBase(name, addr1, addr2, phone, rating, photo, website) {
+        database.ref().push({
+            dbRestaurantName:name,
+            dbAddress1:addr1,
+            dbAddress2:addr2,
+            dbPhoneNumber:phone,
+            dbRating:rating,
+            dbPhoto:photo,
+            dbWebsite:website
 
-     //Depending on what values are needed to build the query string, we can use return object's parameters in address_components array to get just the city name, state, and country
-     // var cityValue = $("#location").val().trim();
-     // console.log(cityValue);
+        })
+    }
+
+    function retrieveAndDisplayRecordsViaYelpAPI() {
+     
     var restaurantName = $("#restaurant-name").val().trim();
    
        var settings = {
            "async": true,
            "crossDomain": true,
          
-        "url": "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location="+globalCity+","+globalState+"&term="+restaurantName,
+        "url": "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location="+globalCity+","+globalState+"&term="+restaurantName+"&limit=1",
         
            "method": "GET",
            "headers": {
@@ -80,6 +92,8 @@
 
             var website = responseObject.url;
             console.log(website);
+
+            saveToFireBase(name,address1,address2,phoneNumber,rating,photo,website);
 
           renderCards(); //need to pass these variables to the render cards function
           function renderCards(){
