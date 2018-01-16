@@ -53,6 +53,21 @@ var config = {
         })
     }
 
+
+    database.ref().on("child_added",function(snapshot){
+
+        //Assign database values to variables
+        var sv = snapshot.val();
+        console.log(sv);
+        renderCards(sv.dbPhoto,
+                sv.dbRestaurantName,
+                sv.dbAddress1,
+                sv.dbAddress2,
+                sv.dbPhoneNumber,
+                sv.dbRating
+             )
+    });
+
     function retrieveAndDisplayRecordsViaYelpAPI() {
      
     var restaurantName = $("#restaurant-name").val().trim();
@@ -95,9 +110,14 @@ var config = {
 
             saveToFireBase(name,address1,address2,phoneNumber,rating,photo,website);
 
-          renderCards(); //need to pass these variables to the render cards function
-          function renderCards(){
+    });   //end of AJAX
+      
 
+
+   }//end function retrieveAndDisplayRecordsViaYelpAPI()
+
+
+ function renderCards(photo,name,address1,address2,phoneNumber,rating){
  
         // var webLink = $("<a>").attr({
         //     "id":"url",
@@ -161,10 +181,7 @@ var config = {
             // $(".card-title, h6,.card-text, h6, #add-date").wrapAll( '<div class="card-body" ></div>' )
             restaurantCard.prependTo("#card-container");
      }
-           });
-
-   }//end function retrieveAndDisplayRecordsViaYelpAPI()
-
+         
  //Submit button click event 
     $("#search-button").on("click", function(event) {
         console.log("on click event for runTest");
@@ -241,3 +258,4 @@ var config = {
         restaurantCard.prependTo("#card-container");
  }
 */
+
