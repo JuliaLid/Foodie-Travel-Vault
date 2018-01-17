@@ -1,22 +1,21 @@
 body {
-  min-height: 75rem; /* Can be removed; just added for demo purposes */
+  min-height: 75rem; 
+  /*background-image: url("../images/pattern.jpg");*/
+   background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),url("../images/pattern.jpg");
+
 }
 
-/*.navbar {
-  margin-bottom: 0;
-}*/
 
 .display-3 {
-  padding-bottom: 2rem;
+  /*padding-bottom: 2rem;*/
   font-family: 'Acme', sans-serif;
   letter-spacing: .2rem;
 }
 
 
 .jumbotron {
- /* padding-top: 6rem;*/
-  padding-bottom: 15rem;
-  margin-bottom: 0;
+  padding: 2rem 0 14rem 0;
+  margin-bottom: 1rem;
   background-color: #fff;
   background-image: url("../images/jumbotron.jpeg");
   /*background-size: 100% 100%;*/
@@ -36,6 +35,10 @@ body {
   max-width: 40rem;
 }
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
 }
 .album {
   min-height: 50rem; /* Can be removed; just added for demo purposes */
@@ -46,7 +49,6 @@ body {
 
 .card {
   float: left;
-  width: 33.333%;
   padding: .75rem;
   margin-bottom: 2rem;
   border: 0;
@@ -55,6 +57,11 @@ body {
 
 .card > img {
   margin-bottom: .75rem;
+  height: 125px;
+}
+
+.card > button {
+  width: 50%;
 }
 
 .card-text {
@@ -68,6 +75,10 @@ body {
 .card-title {
   text-align: center;
   font-family: 'Acme', sans-serif;
+}
+
+.col-sm-3{
+  margin-bottom: 2rem;
 }
 
 footer {
@@ -84,4 +95,8 @@ h1 {
   font-family: 'Acme', sans-serif;
   letter-spacing: .2rem;
   font-size: 3rem;
+}
+
+h4,h6 {
+  margin-bottom: 0;
 }

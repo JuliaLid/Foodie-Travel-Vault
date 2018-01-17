@@ -71,7 +71,11 @@ var config = {
     function retrieveAndDisplayRecordsViaYelpAPI() {
      
     var restaurantName = $("#restaurant-name").val().trim();
-   
+
+
+   $("#restaurant-name").val("");
+   $("#location").val("");
+
        var settings = {
            "async": true,
            "crossDomain": true,
@@ -85,28 +89,24 @@ var config = {
            }
        }
            $.ajax(settings).done(function (response) {
-            console.log("begin response");
-           console.log(response);
-            console.log("end response");
-
+         
             //JSON parameters based on the business search that returns an array
             var responseObject = response.businesses[0];
             var name = responseObject.name;
-            console.log(name); 
+           
             var address1 = responseObject.location.display_address[0];
             var address2=responseObject.location.display_address[1];
-            console.log(address1);
-            console.log(address2);
+         
             var phoneNumber = responseObject.display_phone;
-            console.log(phoneNumber);
+       
             var rating = responseObject.rating + " stars";
             console.log(rating);
 
             var photo = responseObject.image_url;
-            console.log(photo);
+          
 
             var website = responseObject.url;
-            console.log(website);
+           
 
             saveToFireBase(name,address1,address2,phoneNumber,rating,photo,website);
 
@@ -130,8 +130,7 @@ var config = {
             "id":"image",
            "class":"card-img-top"
         });
-
-        // var cardBody = $("<div>").addClass("card-body");
+     
 
           var displayName = $("<h4>").attr({
             "id":"name",
@@ -139,6 +138,7 @@ var config = {
         });
 
           displayName.text(name);
+
 
            var addressHeader = $("<h6>").text("Address");
 
@@ -174,88 +174,30 @@ var config = {
 
              addDateButton.text("Add Date");
 
-             var restaurantCard = $("<div>").addClass("card mb-4");
+             // var restaurantCard = $("<div>").addClass("card mb-4");
        
-            restaurantCard.append(displayImage).append(displayName).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(addDateButton);
+            var cardColumn = $("<div>").addClass("col-sm-3");
+
+            var card = $("<div>").addClass("card h-100");
+
+            var cardBlock = $("<div>").addClass("card-block");
+
+            $(".row").append(cardColumn);
+
+            card.append(displayImage).append(displayName).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(addDateButton);
+
+
             
-            // $(".card-title, h6,.card-text, h6, #add-date").wrapAll( '<div class="card-body" ></div>' )
-            restaurantCard.prependTo("#card-container");
+           
+            card.prependTo(cardColumn);
      }
          
  //Submit button click event 
     $("#search-button").on("click", function(event) {
-        console.log("on click event for runTest");
-         event.preventDefault();
+       event.preventDefault();
        retrieveAndDisplayRecordsViaYelpAPI();
      });
 
 });
 
-/*
- function renderCards(){
-
- 
-    // var webLink = $("<a>").attr({
-    //     "id":"url",
-    //     "href":website,
-    //     "target":"_blank"
-    // });
-
-    var displayImage = $("<img>").attr({
-       "src": "assets/images/RPG.jpg",
-        "id":"image",
-       "class":"card-img-top"
-    });
-
-    // var cardBody = $("<div>").addClass("card-body");
-
-      var displayName = $("<h4>").attr({
-        "id":"name",
-        "class":"card-title"
-    });
-
-      displayName.text("Dakota Junction");
-
-       var addressHeader = $("<h6>").text("Address");
-
-       var displayAddress = $("<p>").attr({
-        "id":"address",
-         "class":"card-text"
-    });
-       displayAddress.html("6631 Commerce Dr"+'<br />' + "Mound, MN 55364");
-
-        var phoneHeader = $("<h6>").text("Phone Number");
-
-        var displayPhone = $("<p>").attr({
-            "id":"phone",
-             "class":"card-text"
-        });
-
-        displayPhone.text("651-123-123");
-
-        var ratingHeader = $("<h6>").text("Rating");
-
-        var displayRating = $("<p>").attr({
-            "id":"rating",
-            "class":"card-text"
-        });
-
-        displayRating.text("5 stars");
-
-         var addDateButton = $("<button>").attr({
-            "id":"add-date",
-            "type":"button",
-             "class":"btn btn-primary btn-sm"
-        });
-
-         addDateButton.text("Add Date");
-
-         var restaurantCard = $("<div>").addClass("card mb-4");
-   
-        restaurantCard.append(displayImage).append(displayName).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(addDateButton);
-        
-        // $(".card-title, h6,.card-text, h6, #add-date").wrapAll( '<div class="card-body" ></div>' )
-        restaurantCard.prependTo("#card-container");
- }
-*/
 
