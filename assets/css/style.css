@@ -1,13 +1,10 @@
 body {
   min-height: 75rem; 
   /*background-image: url("../images/pattern.jpg");*/
-   background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),url("../images/pattern.jpg");
-
+   background: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,.5)),url("../images/pattern.jpg");
 }
 
-
 .display-3 {
-  /*padding-bottom: 2rem;*/
   font-family: 'Acme', sans-serif;
   letter-spacing: .2rem;
 }
@@ -39,13 +36,18 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
-}
-.album {
-  min-height: 50rem; /* Can be removed; just added for demo purposes */
+
+/*.album {
+  min-height: 50rem; 
   padding-top: 3rem;
   padding-bottom: 3rem;
   background-color: #f7f7f7;
-}
+}*/
+
+ .container {
+  background-color: white;
+  border: 3rem solid white;
+ } 
 
 .card {
   float: left;
@@ -82,13 +84,18 @@ body {
 }
 
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   background-color: #D3D3D3;
 }
 
 footer p {
   margin-bottom: .25rem;
+  text-align: center;
+}
+
+.float-right {
+  margin-right: 5rem;
 }
 
 h1 {
