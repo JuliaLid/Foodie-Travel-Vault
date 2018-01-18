@@ -62,6 +62,10 @@ var config = {
             sv.dbPhoneNumber,
             sv.dbRating
         )
+
+         $( function() {
+        $( ".datepicker" ).datepicker();
+        });
     });
 
   //Main function that calls Yelp API when a user enters a location and restaurant
@@ -91,7 +95,7 @@ function retrieveAndDisplayRecordsViaYelpAPI() {
         var address1 = responseObject.location.display_address[0];
         var address2=responseObject.location.display_address[1];
         var phoneNumber = responseObject.display_phone;
-        var rating = responseObject.rating + " stars";
+        var rating = responseObject.rating;
         var photo = responseObject.image_url;
         var website = responseObject.url;
         saveToFireBase(name,address1,address2,phoneNumber,rating,photo,website);
@@ -148,13 +152,17 @@ function retrieveAndDisplayRecordsViaYelpAPI() {
 
     //Adding button
      var addDateButton = $("<button>").attr({
-        "id":"add-date",
         "type":"button",
-         "class":"btn btn-primary btn-sm",
+         "class":"add-date btn btn-primary btn-sm",
          "data-id":id
      });
      addDateButton.text("Add Date");
 
+
+     var datePicker = $("<input>").attr({
+        "class":"datepicker",
+        "type":"text"
+    });
 
     //Putting together the card       
        
@@ -166,10 +174,19 @@ function retrieveAndDisplayRecordsViaYelpAPI() {
 
     $(".row").append(cardColumn);
 
-    card.append(displayImage).append(displayName).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(addDateButton);
+    card.append(displayImage).append(displayName).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton);
 
     card.prependTo(cardColumn);
+
+   
+
 } //end of render function
+
+$(".container").on("click",".add-date", function(event){
+    var selectedDate=$(".datepicker").val().trim();
+    console.log(selectedDate);
+
+});
          
  //Submit button click event 
     $("#search-button").on("click", function(event) {
