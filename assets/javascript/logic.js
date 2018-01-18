@@ -17,7 +17,9 @@ var database = firebase.database();
 
 var input = document.getElementById('location');
 
-var autocomplete = new google.maps.places.Autocomplete(input, { types: ['(cities)'] });
+var autocomplete = new google.maps.places.Autocomplete(input, {
+    types: ['(cities)']
+});
 var globalCity = "";
 var globalState = "";
 
@@ -25,10 +27,10 @@ var globalState = "";
 // should we make them global variables?
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
 
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var place = autocomplete.getPlace();
 
         var city = place.address_components[0].short_name;
@@ -54,7 +56,7 @@ $(document).ready(function() {
     }
 
 
-    database.ref().on("child_added", function(snapshot) {
+    database.ref().on("child_added", function (snapshot) {
 
         //Assign database values to variables
         var sv = snapshot.val();
@@ -66,6 +68,7 @@ $(document).ready(function() {
             sv.dbPhoneNumber,
             sv.dbRating
         )
+
     });
 
     function retrieveAndDisplayRecordsViaYelpAPI() {
@@ -88,7 +91,7 @@ $(document).ready(function() {
                 "Cache-Control": "no-cache",
             }
         }
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
 
             //JSON parameters based on the business search that returns an array
             var responseObject = response.businesses[0];
@@ -99,7 +102,7 @@ $(document).ready(function() {
 
             var phoneNumber = responseObject.display_phone;
 
-            var rating = responseObject.rating + " stars";
+            var rating = responseObject.rating;
             console.log(rating);
 
             var photo = responseObject.image_url;
@@ -160,11 +163,13 @@ $(document).ready(function() {
         var ratingHeader = $("<h6>").text("Rating");
 
         var displayRating = $("<p>").attr({
-            "id": "rating",
-            "class": "card-text"
+            "class": "card-text rating"
         });
 
-        displayRating.text(rating);
+        displayRating.raty({
+            readOnly: true,
+            score: rating
+        })
 
         var addDateButton = $("<button>").attr({
             "id": "add-date",
@@ -182,12 +187,10 @@ $(document).ready(function() {
 
         var cardBlock = $("<div>").addClass("card-block");
 
-        // star rating
-        $("#rating").raty({
-            readOnly: true,
-            score: rating
-        })
+        // 
 
+
+        console.log(rating);
         $(".row").append(cardColumn);
 
         card.append(displayImage).append(displayName).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(addDateButton);
@@ -196,10 +199,11 @@ $(document).ready(function() {
 
 
         card.prependTo(cardColumn);
+
     }
 
     //Submit button click event 
-    $("#search-button").on("click", function(event) {
+    $("#search-button").on("click", function (event) {
         event.preventDefault();
         retrieveAndDisplayRecordsViaYelpAPI();
     });
