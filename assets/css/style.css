@@ -107,3 +107,7 @@ h1 {
 h4,h6 {
   margin-bottom: 0;
 }
+
+input {
+  margin-bottom: 1rem;
+}

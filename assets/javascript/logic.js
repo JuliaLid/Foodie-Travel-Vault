@@ -137,7 +137,7 @@ function retrieveAndDisplayRecordsViaYelpAPI() {
     var phoneHeader = $("<h6>").text("Phone Number");
     var displayPhone = $("<p>").attr({
         "id":"phone",
-         "class":"card-text"
+        "class":"card-text"
     });
     displayPhone.text(phoneNumber);
 
@@ -154,14 +154,14 @@ function retrieveAndDisplayRecordsViaYelpAPI() {
      var addDateButton = $("<button>").attr({
         "type":"button",
          "class":"add-date btn btn-primary btn-sm",
-         "data-id":id
+         "id":id
      });
      addDateButton.text("Add Date");
 
 
      var datePicker = $("<input>").attr({
-        "class":"datepicker",
-        "type":"text"
+        "class":"datepicker form-control-sm",
+        "type":"text",
     });
 
     //Putting together the card       
@@ -169,7 +169,7 @@ function retrieveAndDisplayRecordsViaYelpAPI() {
     var cardColumn = $("<div>").addClass("col-sm-3");
 
     var card = $("<div>").addClass("card h-100");
-
+   
     var cardBlock = $("<div>").addClass("card-block");
 
     $(".row").append(cardColumn);
@@ -183,9 +183,8 @@ function retrieveAndDisplayRecordsViaYelpAPI() {
 } //end of render function
 
 $(".container").on("click",".add-date", function(event){
-    var selectedDate=$(".datepicker").val().trim();
-    console.log(selectedDate);
-
+    var card = $(this).parent().children("input").val();
+    console.log(card)
 });
          
  //Submit button click event 
