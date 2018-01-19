@@ -169,6 +169,15 @@ $(document).ready(function () {
             "type": "text",
         });
 
+        var deleteRestaurant = $("<button>").attr({  
+            "id":"remove-restaurant",
+            "type":"submit",
+            "class": "fa fa-trash-o" 
+        });
+
+        // deleteRestaurant.html('<i class="fa fa-trash-o" aria-hidden="true"></i>');
+      
+
         //Putting together the card       
 
         var cardColumn = $("<div>").addClass("col-sm-3");
@@ -177,9 +186,11 @@ $(document).ready(function () {
 
         var cardBlock = $("<div>").addClass("card-block");
 
+
+
         $(".row").append(cardColumn);
 
-        card.append(displayImage).append(displayName).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton);
+        card.append(displayImage).append(displayName).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
 
         card.prependTo(cardColumn);
 
