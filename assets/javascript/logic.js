@@ -152,7 +152,8 @@ $(document).ready(function () {
 
         displayRating.raty({
             readOnly: true,
-            score: rating
+            score: rating,
+            path: "assets/images"
         })
 
         //Adding button
