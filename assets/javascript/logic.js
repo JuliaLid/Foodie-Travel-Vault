@@ -65,24 +65,24 @@ $(document).ready(function () {
             // }
 
         })
-        
+
             // Puts the business names we call from Yelp into a dropdown list. The number of names in dropdown depends on the limit we set in buildSearchSettings
-            .autocomplete("instance")._renderItem = function(ul, item) {
+            .autocomplete("instance")._renderItem = function (ul, item) {
                 return $("<li>")
                     .append("<div><img src=" + item.image_url.replace("o.jpg", "30s.jpg") + "></div><div><span>" + item.name + "</span><br>" + item.location.address1 + ", " + item.location.city + "</div>")
                     .addClass("dropdown")
                     .appendTo(ul);
-                    
+
             };
     };
     yelpAutocomplete();
 
     //jPList readiness checker
-      $('#demo').jplist({               
-              itemsBox: '.list', 
-              itemPath: '.list-item', 
-              panelPath: '.jplist-panel'    
-           });
+    $('#demo').jplist({
+        itemsBox: '.list',
+        itemPath: '.list-item',
+        panelPath: '.jplist-panel'
+    });
 
     //Function to push Yelp API return object's parameters to Firebase
     function saveToFireBase(name, addr1, addr2, phone, rating, photo, website) {
@@ -121,24 +121,19 @@ $(document).ready(function () {
 
     //Main function that calls Yelp API when a user enters a location and restaurant
     function retrieveAndDisplayRecordsViaYelpAPI() {
-
+        //Grab user input
         var restaurantName = $("#restaurant-name").val().trim();
-
-        //Empty out input values
+        //Empty user input values
         $("#restaurant-name").val("");
 
         var settings = buildSearchSettings(restaurantName);
 
         //Initiating Ajax call
-        $.ajax(settings).done(function (response) {
-
+        $.ajax(settings).done(function(response) {
             //JSON parameters based on the business search that returns an array
             var responseObject = response.businesses[0];
             firebaseDataPrep(responseObject);
-
         }); //end of AJAX
-
-        
     } //end function retrieveAndDisplayRecordsViaYelpAPI()
 
     function firebaseDataPrep(responseObject) {
@@ -227,14 +222,14 @@ $(document).ready(function () {
             "type": "text",
         });
 
-        var deleteRestaurant = $("<button>").attr({  
-            "id":"remove-restaurant",
-            "type":"submit",
-            "class": "fa fa-trash-o" 
+        var deleteRestaurant = $("<button>").attr({
+            "id": "remove-restaurant",
+            "type": "submit",
+            "class": "fa fa-trash-o"
         });
 
         // deleteRestaurant.html('<i class="fa fa-trash-o" aria-hidden="true"></i>');
-      
+
 
         //Putting together the card       
         var cardColumn = $("<div>").addClass("col-sm-3");
