@@ -56,15 +56,15 @@ $(document).ready(function () {
         }
         // Autocomplete function
         $("#restaurant-name").autocomplete({
-            source: getData,
-            // Min length of input before autocomplete function starts
-            minLength: 3,
-            select: selectItem,
-            // change: function () {
-            //     $("#restaurant-name").val("").css("display", 5);
-            // }
+                source: getData,
+                // Min length of input before autocomplete function starts
+                minLength: 3,
+                select: selectItem,
+                // change: function () {
+                //     $("#restaurant-name").val("").css("display", 5);
+                // }
 
-        })
+            })
 
             // Puts the business names we call from Yelp into a dropdown list. The number of names in dropdown depends on the limit we set in buildSearchSettings
             .autocomplete("instance")._renderItem = function (ul, item) {
@@ -129,7 +129,7 @@ $(document).ready(function () {
         var settings = buildSearchSettings(restaurantName);
 
         //Initiating Ajax call
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
             //JSON parameters based on the business search that returns an array
             var responseObject = response.businesses[0];
             firebaseDataPrep(responseObject);
@@ -221,12 +221,12 @@ $(document).ready(function () {
             "class": "datepicker form-control-sm",
             "type": "text",
         });
-      
-        var deleteRestaurant = $("<button>").attr({  
-            "id":"remove-restaurant",
-            "type":"submit",
+
+        var deleteRestaurant = $("<button>").attr({
+            "id": "remove-restaurant",
+            "type": "submit",
             "class": "fa fa-trash-o",
-            "fid":id			
+            "fid": id
         });
 
         //Putting together the card       
@@ -234,7 +234,7 @@ $(document).ready(function () {
         var card = $("<div>").addClass("card h-100");
         var cardBlock = $("<div>").addClass("card-block");
         $(".row").append(cardColumn);
-        card.append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton);
+        card.append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
         card.prependTo(cardColumn);
     } //end of render function
 
@@ -249,17 +249,17 @@ $(document).ready(function () {
         retrieveAndDisplayRecordsViaYelpAPI();
     });
 
-	//remove a restaurant
-   $(".container").on("click", ".fa-trash-o", function (event) {
-	    event.preventDefault();
-		var firebaseId = $(this).attr("fid");
-	    console.log("trash button clicked with firebase id=" + firebaseId);
-		console.log("removing object with firebase id=" + firebaseId);
-		var deleteResult = database.ref().child(firebaseId).remove(function(error){
-		   console.log("During remove of " + firebaseId  + " an error occurred " + error);
+    //remove a restaurant
+    $(".container").on("click", ".fa-trash-o", function (event) {
+        event.preventDefault();
+        var firebaseId = $(this).attr("fid");
+        console.log("trash button clicked with firebase id=" + firebaseId);
+        console.log("removing object with firebase id=" + firebaseId);
+        var deleteResult = database.ref().child(firebaseId).remove(function (error) {
+            console.log("During remove of " + firebaseId + " an error occurred " + error);
         });
-		//refresh browser to reload database
+        //refresh browser to reload database
         window.location.reload();
-    });	
+    });
 
 });
