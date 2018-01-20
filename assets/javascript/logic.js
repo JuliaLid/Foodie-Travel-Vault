@@ -111,7 +111,8 @@ $(document).ready(function () {
             sv.dbAddress1,
             sv.dbAddress2,
             sv.dbPhoneNumber,
-            sv.dbRating
+            sv.dbRating,
+            sv.dbWebsite
         )
 
         $(function () {
@@ -161,13 +162,14 @@ $(document).ready(function () {
     }
 
     //function to render cards using arguments passed by 
-    function renderCards(id, photo, name, address1, address2, phoneNumber, rating) {
+    function renderCards(id, photo, name, address1, address2, phoneNumber, rating,website) {
 
-        // var webLink = $("<a>").attr({
-        //     "id":"url",
-        //     "href":website,
-        //     "target":"_blank"
-        // });
+        var webLink = $("<a>").attr({
+            "id":"url",
+            "href":website,
+            "target":"_blank"
+        });
+
         //Restaurant image
         var displayImage = $("<img>").attr({
             "src": photo,
@@ -229,12 +231,21 @@ $(document).ready(function () {
             "fid": id
         });
 
+       
         //Putting together the card       
         var cardColumn = $("<div>").addClass("col-sm-3");
         var card = $("<div>").addClass("card h-100");
         var cardBlock = $("<div>").addClass("card-block");
         $(".row").prepend(cardColumn);
-        card.append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
+
+        webLink.append(displayImage);
+
+
+        //Adding Time picker
+       // $(".datepicker").val('2011-09-14');
+      
+
+        card.append(webLink).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
 
         card.prependTo(cardColumn);
 
@@ -262,6 +273,7 @@ $(document).ready(function () {
         });
         //refresh browser to reload database
         window.location.reload();
+        $('html,body').scrollTop(0);
     });
 
 });
