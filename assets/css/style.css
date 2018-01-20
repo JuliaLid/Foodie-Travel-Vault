@@ -44,8 +44,11 @@ body {
 }*/
 
 .container {
-  background-color: white;
   border: 3rem solid white;
+}
+
+.form-inline .form-control {
+  width: 20%;
 }
 
 .card {
@@ -53,6 +56,7 @@ body {
   padding: .75rem;
   margin-bottom: 2rem;
   border: 0;
+  position: relative;
   border: 1px #D3D3D3 solid;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
@@ -62,29 +66,34 @@ body {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.card>img {
+a>img {
   margin-bottom: .75rem;
   height: 125px;
 }
 
-.card>button {
+button.add-date {
   width: 50%;
+  position: absolute;
+  bottom: 1rem;
+  left: .7rem;
 }
 
 #remove-restaurant {
-  width: 10%;
+  width: 15%;
   position: absolute;
   bottom: 1rem;
-  right: 1rem;
-  text-align: center;
+  right: .2rem;
+  border: none;
+  background-color: white;
 }
 
 .card-text {
   font-size: 85%;
 }
 
-i {
+.fa {
   padding-right: 5px;
+  color: #2FA4E7;
 }
 
 .card-deck {
@@ -93,12 +102,20 @@ i {
 
 .card-title {
   text-align: center;
-  font-family: 'Acme', sans-serif;
+  /*font-family: 'Acme', sans-serif;*/
+  font-family: 'Anton', sans-serif;
+  letter-spacing: .2rem;
+  text-align: left;
 }
 
 .col-sm-3 {
   margin-bottom: 2rem;
 }
+
+.datepicker {
+  width: 50%;
+}
+
 
 footer {
   padding-top: 2rem;
