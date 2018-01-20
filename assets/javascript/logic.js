@@ -233,9 +233,11 @@ $(document).ready(function () {
         var cardColumn = $("<div>").addClass("col-sm-3");
         var card = $("<div>").addClass("card h-100");
         var cardBlock = $("<div>").addClass("card-block");
-        $(".row").append(cardColumn);
+        $(".row").prepend(cardColumn);
         card.append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
+
         card.prependTo(cardColumn);
+
     } //end of render function
 
     $(".container").on("click", ".add-date", function (event) {
