@@ -117,3 +117,49 @@ h6 {
 input {
   margin-bottom: 1rem;
 }
+
+
+ul.ui-autocomplete {
+  font-size: 12px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: solid 3px black;
+  max-width: 250px;
+}
+
+
+.dropdown{
+  color: #101212;
+  display: flex;
+  padding: 13px;
+  
+}
+
+.dropdown:hover {
+  background-color: #AFCEE3;
+  color: white;
+}
+
+.dropdown span{
+  color: black;
+ /* text-transform: uppercase; */
+  font-weight: bolder;
+}
+
+.dropdown img{
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.dropdown div:first-child{
+  align-items: center;
+  display: flex;
+}
+
+.ui-state-active{
+  background: none !important;
+  border: none !important;
+}
+
+
+
