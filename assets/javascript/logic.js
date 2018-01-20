@@ -35,6 +35,13 @@ $(document).ready(function () {
 
     });
 
+    //jPList readiness checker
+      $('#demo').jplist({               
+              itemsBox: '.list', 
+              itemPath: '.list-item', 
+              panelPath: '.jplist-panel'    
+           });
+
     //Function to push Yelp API return object's parameters to Firebase
     function saveToFireBase(name, addr1, addr2, phone, rating, photo, website) {
         var newChildRef = database.ref().push({
