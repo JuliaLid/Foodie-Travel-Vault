@@ -180,11 +180,10 @@ $(document).ready(function () {
         var deleteRestaurant = $("<button>").attr({  
             "id":"remove-restaurant",
             "type":"submit",
-            "class": "fa fa-trash-o" 
+            "class": "fa fa-trash-o",
+            "fid":id			
         });
 
-        // deleteRestaurant.html('<i class="fa fa-trash-o" aria-hidden="true"></i>');
-      
 
         //Putting together the card       
 
@@ -202,13 +201,11 @@ $(document).ready(function () {
 
         card.prependTo(cardColumn);
 
-
-
     } //end of render function
 
     $(".container").on("click", ".add-date", function (event) {
         var card = $(this).parent().children("input").val();
-        console.log(card)
+        console.log(card);
     });
 
     //Submit button click event 
@@ -216,5 +213,18 @@ $(document).ready(function () {
         event.preventDefault();
         retrieveAndDisplayRecordsViaYelpAPI();
     });
+
+	//remove a restaurant
+   $(".container").on("click", ".fa-trash-o", function (event) {
+	    event.preventDefault();
+		var firebaseId = $(this).attr("fid");
+	    console.log("trash button clicked with firebase id=" + firebaseId);
+		console.log("removing object with firebase id=" + firebaseId);
+		var deleteResult = database.ref().child(firebaseId).remove(function(error){
+		   console.log("During remove of " + firebaseId  + " an error occurred " + error);
+        });
+		//refresh browser to reload database
+        window.location.reload();
+    });	
 
 });
