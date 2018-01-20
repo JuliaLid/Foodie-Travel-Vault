@@ -93,7 +93,7 @@ $(document).ready(function () {
             dbPhoneNumber: phone,
             dbRating: rating,
             dbPhoto: photo,
-            dbWebsite: website
+            dbWebsite: website,
         });
     }
 
@@ -104,6 +104,15 @@ $(document).ready(function () {
         console.log(snapshot);
         //console log the unique Firebase ID
         console.log(snapshot.key);
+		
+		//if sv has dbDate, then take date and display it
+		//if the date does not exist (which it may not initially) then display an empty string.
+		console.log( " Does date field exist? '" + sv.hasOwnProperty('dbDate').toString() + "'");
+		var dateVar = "";
+		if (sv.hasOwnProperty('dbDate')){
+			dateVar = sv.dbDate;
+		}
+		
 
         renderCards(snapshot.key,
             sv.dbPhoto,
@@ -112,7 +121,7 @@ $(document).ready(function () {
             sv.dbAddress2,
             sv.dbPhoneNumber,
             sv.dbRating,
-            sv.dbWebsite
+			dateVar
         )
 
         $(function () {
@@ -161,15 +170,14 @@ $(document).ready(function () {
         };
     }
 
-    //function to render cards using arguments passed by 
-    function renderCards(id, photo, name, address1, address2, phoneNumber, rating,website) {
+    //function to render cards using arguments passed in 
+    function renderCards(id, photo, name, address1, address2, phoneNumber, rating, date) {
 
-        var webLink = $("<a>").attr({
-            "id":"url",
-            "href":website,
-            "target":"_blank"
-        });
-
+        // var webLink = $("<a>").attr({
+        //     "id":"url",
+        //     "href":website,
+        //     "target":"_blank"
+        // });
         //Restaurant image
         var displayImage = $("<img>").attr({
             "src": photo,
@@ -224,6 +232,9 @@ $(document).ready(function () {
             "type": "text",
         });
 
+        //adding date to date input field
+		datePicker.val(date);
+
         var deleteRestaurant = $("<button>").attr({
             "id": "remove-restaurant",
             "type": "submit",
@@ -231,29 +242,28 @@ $(document).ready(function () {
             "fid": id
         });
 
-       
         //Putting together the card       
         var cardColumn = $("<div>").addClass("col-sm-3");
         var card = $("<div>").addClass("card h-100");
         var cardBlock = $("<div>").addClass("card-block");
         $(".row").prepend(cardColumn);
-
-        webLink.append(displayImage);
-
-
-        //Adding Time picker
-       // $(".datepicker").val('2011-09-14');
-      
-
-        card.append(webLink).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
+        card.append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
 
         card.prependTo(cardColumn);
 
     } //end of render function
 
     $(".container").on("click", ".add-date", function (event) {
-        var card = $(this).parent().children("input").val();
-        console.log(card);
+		//get the date from the date text field
+		var indate = $(this).parent().children("input").val().trim();
+		 //get firebase id from the 'add-date' button that was clicked
+		var firebaseId = $(this).attr("id");
+		console.log("In add-date firebaseId is=" + firebaseId);
+
+		//add the date info to the database
+		database.ref().child(firebaseId).update(
+			 {dbDate:indate}
+         );
     });
 
     //Submit button click event 
@@ -273,7 +283,6 @@ $(document).ready(function () {
         });
         //refresh browser to reload database
         window.location.reload();
-        $('html,body').scrollTop(0);
     });
 
 });
