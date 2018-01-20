@@ -71,8 +71,20 @@ body {
   width: 50%;
 }
 
+#remove-restaurant {
+  width: 10%;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  text-align: center;
+}
+
 .card-text {
   font-size: 85%;
+}
+
+i {
+  padding-right: 5px;
 }
 
 .card-deck {

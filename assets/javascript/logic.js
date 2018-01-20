@@ -77,6 +77,12 @@ $(document).ready(function () {
     };
     yelpAutocomplete();
 
+    //jPList readiness checker
+      $('#demo').jplist({               
+              itemsBox: '.list', 
+              itemPath: '.list-item', 
+              panelPath: '.jplist-panel'    
+           });
 
     //Function to push Yelp API return object's parameters to Firebase
     function saveToFireBase(name, addr1, addr2, phone, rating, photo, website) {
@@ -220,6 +226,15 @@ $(document).ready(function () {
             "class": "datepicker form-control-sm",
             "type": "text",
         });
+
+        var deleteRestaurant = $("<button>").attr({  
+            "id":"remove-restaurant",
+            "type":"submit",
+            "class": "fa fa-trash-o" 
+        });
+
+        // deleteRestaurant.html('<i class="fa fa-trash-o" aria-hidden="true"></i>');
+      
 
         //Putting together the card       
         var cardColumn = $("<div>").addClass("col-sm-3");
