@@ -221,15 +221,13 @@ $(document).ready(function () {
             "class": "datepicker form-control-sm",
             "type": "text",
         });
-
-        var deleteRestaurant = $("<button>").attr({
-            "id": "remove-restaurant",
-            "type": "submit",
-            "class": "fa fa-trash-o"
+      
+        var deleteRestaurant = $("<button>").attr({  
+            "id":"remove-restaurant",
+            "type":"submit",
+            "class": "fa fa-trash-o",
+            "fid":id			
         });
-
-        // deleteRestaurant.html('<i class="fa fa-trash-o" aria-hidden="true"></i>');
-
 
         //Putting together the card       
         var cardColumn = $("<div>").addClass("col-sm-3");
@@ -242,7 +240,7 @@ $(document).ready(function () {
 
     $(".container").on("click", ".add-date", function (event) {
         var card = $(this).parent().children("input").val();
-        console.log(card)
+        console.log(card);
     });
 
     //Submit button click event 
@@ -250,5 +248,18 @@ $(document).ready(function () {
         event.preventDefault();
         retrieveAndDisplayRecordsViaYelpAPI();
     });
+
+	//remove a restaurant
+   $(".container").on("click", ".fa-trash-o", function (event) {
+	    event.preventDefault();
+		var firebaseId = $(this).attr("fid");
+	    console.log("trash button clicked with firebase id=" + firebaseId);
+		console.log("removing object with firebase id=" + firebaseId);
+		var deleteResult = database.ref().child(firebaseId).remove(function(error){
+		   console.log("During remove of " + firebaseId  + " an error occurred " + error);
+        });
+		//refresh browser to reload database
+        window.location.reload();
+    });	
 
 });
