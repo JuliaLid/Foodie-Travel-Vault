@@ -22,9 +22,16 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-$(document).ready(function () {
+ $('#myModal').on('shown.bs.modal', function() {
+    $('#myInput').focus()
+ })
+ 
 
-    //Google Maps API
+$(document).ready(function () {
+  
+     // $("#myModal").modal();
+
+      //Google Maps API
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var place = autocomplete.getPlace();
         var city = place.address_components[0].short_name;
@@ -226,7 +233,7 @@ $(document).ready(function () {
         //Adding button
         var addDateButton = $("<button>").attr({
             "type": "button",
-            "class": "add-date btn btn-primary btn-sm",
+            "class": "add-date btn btn-info btn-sm",
             "id": id
         });
         addDateButton.text("Add Date");

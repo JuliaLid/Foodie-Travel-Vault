@@ -16,8 +16,14 @@ body {
   background-image: url("../images/jumbotron.jpeg");
   /*background-size: 100% 100%;*/
   background-position: center bottom;
+  position: relative;
 }
 
+#modal {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+}
 .jumbotron p:last-child {
   margin-bottom: 0;
 }
@@ -48,7 +54,7 @@ body {
 }
 
 .form-inline .form-control {
-  width: 20%;
+  width: 15%;
 }
 
 .card {
@@ -87,13 +93,19 @@ button.add-date {
   background-color: white;
 }
 
+#remove-restaurant:hover{
+  cursor: pointer;
+   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
 .card-text {
   font-size: 85%;
 }
 
 .fa {
   padding-right: 5px;
-  color: #2FA4E7;
+  /*color: #2FA4E7;*/
+  color:#033C73;
 }
 
 .card-deck {
@@ -106,6 +118,7 @@ button.add-date {
   font-family: 'Anton', sans-serif;
   letter-spacing: .2rem;
   text-align: left;
+  color: #033C73;
 }
 
 .col-sm-3 {
@@ -141,6 +154,10 @@ h1 {
 h4,
 h6 {
   margin-bottom: 0;
+}
+
+p {
+  color: #033C73;
 }
 
 input {
