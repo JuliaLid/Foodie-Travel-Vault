@@ -44,15 +44,7 @@ body {
 }*/
 
 .container {
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  background-color: white;
-=======
->>>>>>> a51ef6a492635fa8bc00d98b4c15d876096588d1
-  border: 3rem solid white;
-=======
   border: none;
->>>>>>> Stashed changes
 }
 
 .form-inline .form-control {
