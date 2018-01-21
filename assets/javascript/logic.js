@@ -56,15 +56,15 @@ $(document).ready(function () {
         }
         // Autocomplete function
         $("#restaurant-name").autocomplete({
-            source: getData,
-            // Min length of input before autocomplete function starts
-            minLength: 3,
-            select: selectItem,
-            // change: function () {
-            //     $("#restaurant-name").val("").css("display", 5);
-            // }
+                source: getData,
+                // Min length of input before autocomplete function starts
+                minLength: 3,
+                select: selectItem,
+                // change: function () {
+                //     $("#restaurant-name").val("").css("display", 5);
+                // }
 
-        })
+            })
 
             // Puts the business names we call from Yelp into a dropdown list. The number of names in dropdown depends on the limit we set in buildSearchSettings
             .autocomplete("instance")._renderItem = function (ul, item) {
@@ -93,7 +93,7 @@ $(document).ready(function () {
             dbPhoneNumber: phone,
             dbRating: rating,
             dbPhoto: photo,
-            dbWebsite: website
+            dbWebsite: website,
         });
     }
 
@@ -104,6 +104,15 @@ $(document).ready(function () {
         console.log(snapshot);
         //console log the unique Firebase ID
         console.log(snapshot.key);
+		
+		//if sv has dbDate, then take date and display it
+		//if the date does not exist (which it may not initially) then display an empty string.
+		console.log( " Does date field exist? '" + sv.hasOwnProperty('dbDate').toString() + "'");
+		var dateVar = "";
+		if (sv.hasOwnProperty('dbDate')){
+			dateVar = sv.dbDate;
+		}
+		
 
         renderCards(snapshot.key,
             sv.dbPhoto,
@@ -111,7 +120,8 @@ $(document).ready(function () {
             sv.dbAddress1,
             sv.dbAddress2,
             sv.dbPhoneNumber,
-            sv.dbRating
+            sv.dbRating,
+			dateVar
         )
 
         $(function () {
@@ -129,7 +139,7 @@ $(document).ready(function () {
         var settings = buildSearchSettings(restaurantName);
 
         //Initiating Ajax call
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
             //JSON parameters based on the business search that returns an array
             var responseObject = response.businesses[0];
             firebaseDataPrep(responseObject);
@@ -160,8 +170,8 @@ $(document).ready(function () {
         };
     }
 
-    //function to render cards using arguments passed by 
-    function renderCards(id, photo, name, address1, address2, phoneNumber, rating) {
+    //function to render cards using arguments passed in 
+    function renderCards(id, photo, name, address1, address2, phoneNumber, rating, date) {
 
         // var webLink = $("<a>").attr({
         //     "id":"url",
@@ -221,26 +231,39 @@ $(document).ready(function () {
             "class": "datepicker form-control-sm",
             "type": "text",
         });
-      
-        var deleteRestaurant = $("<button>").attr({  
-            "id":"remove-restaurant",
-            "type":"submit",
+
+        //adding date to date input field
+		datePicker.val(date);
+
+        var deleteRestaurant = $("<button>").attr({
+            "id": "remove-restaurant",
+            "type": "submit",
             "class": "fa fa-trash-o",
-            "fid":id			
+            "fid": id
         });
 
         //Putting together the card       
         var cardColumn = $("<div>").addClass("col-sm-3");
         var card = $("<div>").addClass("card h-100");
         var cardBlock = $("<div>").addClass("card-block");
-        $(".row").append(cardColumn);
-        card.append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton);
+        $(".row").prepend(cardColumn);
+        card.append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
+
         card.prependTo(cardColumn);
+
     } //end of render function
 
     $(".container").on("click", ".add-date", function (event) {
-        var card = $(this).parent().children("input").val();
-        console.log(card);
+		//get the date from the date text field
+		var indate = $(this).parent().children("input").val().trim();
+		 //get firebase id from the 'add-date' button that was clicked
+		var firebaseId = $(this).attr("id");
+		console.log("In add-date firebaseId is=" + firebaseId);
+
+		//add the date info to the database
+		database.ref().child(firebaseId).update(
+			 {dbDate:indate}
+         );
     });
 
     //Submit button click event 
@@ -249,17 +272,17 @@ $(document).ready(function () {
         retrieveAndDisplayRecordsViaYelpAPI();
     });
 
-	//remove a restaurant
-   $(".container").on("click", ".fa-trash-o", function (event) {
-	    event.preventDefault();
-		var firebaseId = $(this).attr("fid");
-	    console.log("trash button clicked with firebase id=" + firebaseId);
-		console.log("removing object with firebase id=" + firebaseId);
-		var deleteResult = database.ref().child(firebaseId).remove(function(error){
-		   console.log("During remove of " + firebaseId  + " an error occurred " + error);
+    //remove a restaurant
+    $(".container").on("click", ".fa-trash-o", function (event) {
+        event.preventDefault();
+        var firebaseId = $(this).attr("fid");
+        console.log("trash button clicked with firebase id=" + firebaseId);
+        console.log("removing object with firebase id=" + firebaseId);
+        var deleteResult = database.ref().child(firebaseId).remove(function (error) {
+            console.log("During remove of " + firebaseId + " an error occurred " + error);
         });
-		//refresh browser to reload database
+        //refresh browser to reload database
         window.location.reload();
-    });	
+    });
 
 });
