@@ -31,6 +31,7 @@ $(document).ready(function () {
         // "If" handles the dropdown select --> card formation, else handles the text input only --> card formation
         // The global variable itemInfo gets a value assigned (selectItem function) when user selects a dropdown item. If it has a value, then save it to firebase. If not, do regular yelp search.
         if (itemInfo) {
+            // Save itemInfo in firebase
             firebaseDataPrep(itemInfo);
             itemInfo = null;
             $("#restaurant-name").val("");
@@ -72,20 +73,24 @@ $(document).ready(function () {
             // Store the item into global variable itemInfo
             itemInfo = ui.item;
             // firebaseDataPrep(ui.item.id);
+            // Prevents clearing of data input on select 
             return false;
         }
-        // Autocomplete function
+        // jQuery library Autocomplete function (https://jqueryui.com/autocomplete/#multiple-remote)
         $("#restaurant-name").autocomplete({
-            source: getData,
             // Min length of input before autocomplete function starts
             minLength: 3,
+            // Runs getData function on user input
+            source: getData,
+            // Runs selectItem function on user select 
             select: selectItem,
+            // Unassigns value from global itemInfo variable whenever a dropdown appears (every dropdown initiates a yelp search). This allows user to search/look at multiple dropdowns before selection and have the final selected item get rendered to card
             search: function() {
                 itemInfo = null;
             }
         })
 
-            // Puts the business names we call from Yelp into a dropdown list. The number of names in dropdown depends on the limit we set in buildSearchSettings
+            // Formats the businesses we retrieve from the Yelp API query into a dropdown list. The number of items in dropdown depends on the limit we set in buildSearchSettings
             .autocomplete("instance")._renderItem = function(ul, item) {
                 return $("<li>")
                     .append("<div><img src=" + item.image_url.replace("o.jpg", "30s.jpg") + "></div><div><span>" + item.name + "</span><br>" + item.location.address1 + ", " + item.location.city + "</div>")
