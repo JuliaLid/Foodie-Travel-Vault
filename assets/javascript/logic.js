@@ -1,12 +1,11 @@
 //Declare global variables
-
 var input = document.getElementById('location');
 var autocomplete = new google.maps.places.Autocomplete(input, {
     types: ['(cities)']
 });
-var globalCity = "";
-var globalState = "";
-
+var globalCity;
+var globalState;
+var itemInfo;
 
 
 //Initialize Firebase
@@ -22,7 +21,24 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+
 $(document).ready(function () {
+    //Submit button click event 
+    $("#search-button").on("click", function (event) {
+        event.preventDefault();
+
+        // User can search for restaurant name in 2 ways: enter plain text without selecting a dropdown item or selecting a dropdown item. 
+        // "If" handles the dropdown select --> card formation, else handles the text input only --> card formation
+        // The global variable itemInfo gets a value assigned (selectItem function) when user selects a dropdown item. If it has a value, then save it to firebase. If not, do regular yelp search.
+        if (itemInfo) {
+            firebaseDataPrep(itemInfo);
+            itemInfo = null;
+            $("#restaurant-name").val("");
+        } else {
+            retrieveAndDisplayRecordsViaYelpAPI();
+        }
+
+    });
 
     //Google Maps API
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
@@ -40,7 +56,7 @@ $(document).ready(function () {
         var restaurantText = $("#restaurant-name").val();
 
         // data request to yelp which uses the settings in buildSearchSettings function 
-        var getData = function (request, response) {
+        var getData = function(request, response) {
             var settings = buildSearchSettings(request.term);
 
             //Initiating Ajax call to Yelp API
@@ -48,31 +64,33 @@ $(document).ready(function () {
                 response(data.businesses);
             });
         };
-        // When you select a restaurant in the drop down, it sets the restaurant name as the restaurant input
-        var selectItem = function (event, ui) {
+
+        // Things that happen when user selects an item in the dropdown list
+        var selectItem = function(event, ui) {
+            // Set the restaurant name as the restaurant input
             $("#restaurant-name").val(ui.item.name);
-            // firebaseDataPrep(ui.item);
+            // Store the item into global variable itemInfo
+            itemInfo = ui.item;
+            // firebaseDataPrep(ui.item.id);
             return false;
         }
         // Autocomplete function
         $("#restaurant-name").autocomplete({
-                source: getData,
-                // Min length of input before autocomplete function starts
-                minLength: 3,
-                select: selectItem,
-                // change: function () {
-                //     $("#restaurant-name").val("").css("display", 5);
-                // }
-
-            })
+            source: getData,
+            // Min length of input before autocomplete function starts
+            minLength: 3,
+            select: selectItem,
+            search: function() {
+                itemInfo = null;
+            }
+        })
 
             // Puts the business names we call from Yelp into a dropdown list. The number of names in dropdown depends on the limit we set in buildSearchSettings
-            .autocomplete("instance")._renderItem = function (ul, item) {
+            .autocomplete("instance")._renderItem = function(ul, item) {
                 return $("<li>")
                     .append("<div><img src=" + item.image_url.replace("o.jpg", "30s.jpg") + "></div><div><span>" + item.name + "</span><br>" + item.location.address1 + ", " + item.location.city + "</div>")
                     .addClass("dropdown")
                     .appendTo(ul);
-
             };
     };
     yelpAutocomplete();
@@ -104,15 +122,14 @@ $(document).ready(function () {
         console.log(snapshot);
         //console log the unique Firebase ID
         console.log(snapshot.key);
-		
-		//if sv has dbDate, then take date and display it
-		//if the date does not exist (which it may not initially) then display an empty string.
-		console.log( " Does date field exist? '" + sv.hasOwnProperty('dbDate').toString() + "'");
-		var dateVar = "";
-		if (sv.hasOwnProperty('dbDate')){
-			dateVar = sv.dbDate;
-		}
-		
+
+        //if sv has dbDate, then take date and display it
+        //if the date does not exist (which it may not initially) then display an empty string.
+        console.log(" Does date field exist? '" + sv.hasOwnProperty('dbDate').toString() + "'");
+        var dateVar = "";
+        if (sv.hasOwnProperty('dbDate')) {
+            dateVar = sv.dbDate;
+        }
 
         renderCards(snapshot.key,
             sv.dbPhoto,
@@ -121,7 +138,7 @@ $(document).ready(function () {
             sv.dbAddress2,
             sv.dbPhoneNumber,
             sv.dbRating,
-			dateVar
+            dateVar
         )
 
         $(function () {
@@ -172,7 +189,6 @@ $(document).ready(function () {
 
     //function to render cards using arguments passed in 
     function renderCards(id, photo, name, address1, address2, phoneNumber, rating, date) {
-
         // var webLink = $("<a>").attr({
         //     "id":"url",
         //     "href":website,
@@ -184,6 +200,7 @@ $(document).ready(function () {
             "id": "image",
             "class": "card-img-top"
         });
+
         //Restaurant name
         var displayName = $("<h4>").attr({
             "id": "name",
@@ -233,7 +250,7 @@ $(document).ready(function () {
         });
 
         //adding date to date input field
-		datePicker.val(date);
+        datePicker.val(date);
 
         var deleteRestaurant = $("<button>").attr({
             "id": "remove-restaurant",
@@ -250,26 +267,19 @@ $(document).ready(function () {
         card.append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
 
         card.prependTo(cardColumn);
-
-    } //end of render function
+    } //end of renderCards function
 
     $(".container").on("click", ".add-date", function (event) {
-		//get the date from the date text field
-		var indate = $(this).parent().children("input").val().trim();
-		 //get firebase id from the 'add-date' button that was clicked
-		var firebaseId = $(this).attr("id");
-		console.log("In add-date firebaseId is=" + firebaseId);
+        //get the date from the date text field
+        var indate = $(this).parent().children("input").val().trim();
+        //get firebase id from the 'add-date' button that was clicked
+        var firebaseId = $(this).attr("id");
+        console.log("In add-date firebaseId is=" + firebaseId);
 
-		//add the date info to the database
-		database.ref().child(firebaseId).update(
-			 {dbDate:indate}
-         );
-    });
-
-    //Submit button click event 
-    $("#search-button").on("click", function (event) {
-        event.preventDefault();
-        retrieveAndDisplayRecordsViaYelpAPI();
+        //add the date info to the database
+        database.ref().child(firebaseId).update(
+            { dbDate: indate }
+        );
     });
 
     //remove a restaurant
@@ -284,5 +294,4 @@ $(document).ready(function () {
         //refresh browser to reload database
         window.location.reload();
     });
-
 });
