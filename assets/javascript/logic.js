@@ -171,13 +171,15 @@ $(document).ready(function () {
     }
 
     //function to render cards using arguments passed in 
-    function renderCards(id, photo, name, address1, address2, phoneNumber, rating, date) {
+    function renderCards(id, photo, name, address1, address2, phoneNumber, rating, date, website) {
+        //Adding a link to the Yelp search result for the restaurant
+        var webLink = $("<a>").attr({
+            "id":"url",
+            "href":website,
+            "target":"_blank"
+        });
+        webLink.append(displayImage);
 
-        // var webLink = $("<a>").attr({
-        //     "id":"url",
-        //     "href":website,
-        //     "target":"_blank"
-        // });
         //Restaurant image
         var displayImage = $("<img>").attr({
             "src": photo,
@@ -232,7 +234,7 @@ $(document).ready(function () {
             "type": "text",
         });
 
-        //adding date to date input field
+        //adding date to date input field on refresh
 		datePicker.val(date);
 
         var deleteRestaurant = $("<button>").attr({
@@ -242,12 +244,12 @@ $(document).ready(function () {
             "fid": id
         });
 
-        //Putting together the card       
+        //Putting together the restaurant card       
         var cardColumn = $("<div>").addClass("col-sm-3");
         var card = $("<div>").addClass("card h-100");
         var cardBlock = $("<div>").addClass("card-block");
         $(".row").prepend(cardColumn);
-        card.append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
+        card.append(webLink).append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
 
         card.prependTo(cardColumn);
 
