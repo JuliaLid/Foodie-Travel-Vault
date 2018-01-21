@@ -44,8 +44,12 @@ body {
 }*/
 
 .container {
+<<<<<<< Updated upstream
   background-color: white;
   border: 3rem solid white;
+=======
+  border: none;
+>>>>>>> Stashed changes
 }
 
 .card {
@@ -98,6 +102,7 @@ i {
 
 .col-sm-3 {
   margin-bottom: 2rem;
+  max-width: 100%;
 }
 
 footer {
@@ -173,5 +178,35 @@ ul.ui-autocomplete {
   border: none !important;
 }
 
+/*
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+  .col-sm-3{
+    max-width: 100%;
+  }
+ }
 
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+  .col-sm-3{
+    max-width: 100%;
+  }
+ }
 
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+  .col-sm-3{
+    max-width: 100%;
+  }
+ }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+  .col-sm-3{
+    max-width: 100%;
+  }
+ }
+
+all:
+jumbotron - max-height: 35vh;
+*/
