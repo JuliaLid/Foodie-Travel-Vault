@@ -94,7 +94,7 @@ $(document).ready(function () {
             dbRating: rating,
             dbPhoto: photo,
             dbWebsite: website,
-        });
+       });
     }
 
     //Add an event listener to the database to pass parameters and evoke function to render Bootstrap cards when a new restaurant is added to thedatabase and on window load-load
@@ -121,6 +121,7 @@ $(document).ready(function () {
             sv.dbAddress2,
             sv.dbPhoneNumber,
             sv.dbRating,
+            sv.dbWebsite,
 			dateVar
         )
 
@@ -171,14 +172,15 @@ $(document).ready(function () {
     }
 
     //function to render cards using arguments passed in 
-    function renderCards(id, photo, name, address1, address2, phoneNumber, rating, date, website) {
+    function renderCards(id, photo, name, address1, address2, phoneNumber, rating, website, date) {
         //Adding a link to the Yelp search result for the restaurant
+        console.log(website);
         var webLink = $("<a>").attr({
             "id":"url",
             "href":website,
             "target":"_blank"
         });
-        webLink.append(displayImage);
+        
 
         //Restaurant image
         var displayImage = $("<img>").attr({
@@ -245,11 +247,12 @@ $(document).ready(function () {
         });
 
         //Putting together the restaurant card       
+        webLink.append(displayImage);
         var cardColumn = $("<div>").addClass("col-sm-3");
         var card = $("<div>").addClass("card h-100");
         var cardBlock = $("<div>").addClass("card-block");
         $(".row").prepend(cardColumn);
-        card.append(webLink).append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
+        card.append(webLink).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
 
         card.prependTo(cardColumn);
 
