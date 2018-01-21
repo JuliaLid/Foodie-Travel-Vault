@@ -24,6 +24,42 @@ body {
   left: 1rem;
   top: 1rem;
 }
+
+.modal-text h4{
+  color: #033C73;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 2rem;
+}
+
+.modal-text h4:last-of-type{
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.modal-text p{
+  color: #033C73;
+  text-align: left;
+  margin-bottom: .3rem;
+ 
+}
+
+.modal-text p:first-of-type{
+  margin-bottom: 1rem;
+}
+
+ul { 
+    display: block;
+    list-style-type: disc;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
+    color: #033C73;
+}
+
+
 .jumbotron p:last-child {
   margin-bottom: 0;
 }
@@ -66,6 +102,7 @@ body {
   border: 1px #D3D3D3 solid;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+  background-color:  #F8F8F8;
 }
 
 .card:hover {
