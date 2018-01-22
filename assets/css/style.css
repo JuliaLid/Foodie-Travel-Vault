@@ -166,6 +166,9 @@ button.add-date {
   width: 50%;
 }
 
+.ui-datepicker {
+  display: none;
+}
 
 footer {
   padding-top: 2rem;
