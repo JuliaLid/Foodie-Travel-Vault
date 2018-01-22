@@ -26,7 +26,6 @@ $(document).ready(function () {
     //Submit button click event 
     $("#search-button").on("click", function (event) {
         event.preventDefault();
-
         // User can search for restaurant name in 2 ways: enter plain text without selecting a dropdown item or selecting a dropdown item. 
         // "If" handles the dropdown select --> card formation, else handles the text input only --> card formation
         // The global variable itemInfo gets a value assigned (selectItem function) when user selects a dropdown item. If it has a value, then save it to firebase. If not, do regular yelp search.
@@ -72,7 +71,6 @@ $(document).ready(function () {
             $("#restaurant-name").val(ui.item.name);
             // Store the item into global variable itemInfo
             itemInfo = ui.item;
-            // firebaseDataPrep(ui.item.id);
             // Prevents clearing of data input on select 
             return false;
         }
@@ -265,12 +263,11 @@ $(document).ready(function () {
         });
 
         //Putting together the card       
-        var cardColumn = $("<div>").addClass("col-sm-3");
+        var cardColumn = $("<div>").addClass("col-sm-3", displayName);
         var card = $("<div>").addClass("card h-100");
         var cardBlock = $("<div>").addClass("card-block");
         $(".row").prepend(cardColumn);
         card.append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
-
         card.prependTo(cardColumn);
     } //end of renderCards function
 
