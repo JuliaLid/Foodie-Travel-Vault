@@ -228,9 +228,12 @@ $(document).ready(function () {
             readOnly: true,
             score: rating,
             path: "assets/images"
-        })
+        });
 
-        //Adding button
+        //Select a date header
+        var selectDateHeader =  $("<h6>").text("Select Date");
+
+        //Button to add a date
         var addDateButton = $("<button>").attr({
             "type": "button",
             "class": "add-date btn btn-info btn-sm",
@@ -259,7 +262,7 @@ $(document).ready(function () {
         var card = $("<div>").addClass("card h-100");
         var cardBlock = $("<div>").addClass("card-block");
         $(".row").prepend(cardColumn);
-        card.append(webLink).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
+        card.append(webLink).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(selectDateHeader).append(datePicker).append(addDateButton).append(deleteRestaurant);
 
         card.prependTo(cardColumn);
 
