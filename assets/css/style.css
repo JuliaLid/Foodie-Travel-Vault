@@ -86,7 +86,7 @@ ul {
 }*/
 
 .container {
-  border: 3rem solid white;
+  margin-top: 3rem;
 }
 
 .form-inline .form-control {
@@ -127,7 +127,7 @@ button.add-date {
   bottom: 1rem;
   right: .2rem;
   border: none;
-  background-color: white;
+  background-color: #F8F8F8;
 }
 
 #remove-restaurant:hover{
