@@ -1,4 +1,4 @@
-# Foodie's TravelVault
+# Foodie's Travel Vault
 
 
 ## Project Overview
@@ -20,14 +20,14 @@ This web application is intended for a discerning foodie who is serious about se
 * [Google Maps API](https://developers.google.com/maps/) - to auto-complete city, state, and country
 * [Yelp Business Search API](https://www.yelp.com/developers/documentation/v3/business_search ) 
     * Populates a list of matching restaurants and auto-complete the name and location
-    * Returns a JSON restaurant object 
+    * Returns a matching JSON restaurant object 
 
 ### Libraries
 * [jQuery](https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js) 
     * Each restaurant card is dynamically rendered using jQuery
     * jQuery UI library was used to add a date picker 
-    * jQuery Autocomplete was used for restaurant search field
-* [Bootstrap 4.0](https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css) - for general styling
+    * jQuery Autocomplete was used for the restaurant search field
+* [Bootstrap 4.0](https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css) - grid and  styling components
 * [Raty](https://github.com/wbotelhos/raty) - to display restaurant rating with stars
 
 ### Graphics and Fonts
