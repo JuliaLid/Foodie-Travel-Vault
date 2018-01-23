@@ -1,5 +1,5 @@
 # Foodie's Travel Vault
-
+![banner](https://user-images.githubusercontent.com/31745567/35255227-a7021194-ffb3-11e7-8b55-d61ea2fc8d74.JPG)
 
 ## Project Overview
 This web application is intended for a discerning foodie who is serious about selecting the best dining options prior to going on a trip. After completing the restaurant research during travel planning, you can add the selected restaurants to a vault. When your itinerary is finalized, simply add a date to visit each restaurant that works best with your schedule. You can remove the restaurant from the vault at any time. 
