@@ -21,6 +21,14 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+ $('#myModal').on('shown.bs.modal', function() {
+    $('#myInput').focus()
+ })
+ 
+
+$(document).ready(function () {
+  
+     // $("#myModal").modal();
 
 $(document).ready(function () {
     //Submit button click event 
@@ -40,7 +48,7 @@ $(document).ready(function () {
 
     });
 
-    //Google Maps API
+      //Google Maps API
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var place = autocomplete.getPlace();
         var city = place.address_components[0].short_name;
@@ -115,7 +123,7 @@ $(document).ready(function () {
             dbRating: rating,
             dbPhoto: photo,
             dbWebsite: website,
-        });
+       });
     }
 
     //Add an event listener to the database to pass parameters and evoke function to render Bootstrap cards when a new restaurant is added to thedatabase and on window load-load
@@ -141,8 +149,9 @@ $(document).ready(function () {
             sv.dbAddress2,
             sv.dbPhoneNumber,
             sv.dbRating,
-            dateVar
-        )
+            sv.dbWebsite,
+			      dateVar
+        );
 
         $(function () {
             $(".datepicker").datepicker();
@@ -191,12 +200,16 @@ $(document).ready(function () {
     }
 
     //function to render cards using arguments passed in 
-    function renderCards(id, photo, name, address1, address2, phoneNumber, rating, date) {
-        // var webLink = $("<a>").attr({
-        //     "id":"url",
-        //     "href":website,
-        //     "target":"_blank"
-        // });
+
+    function renderCards(id, photo, name, address1, address2, phoneNumber, rating, website, date) {
+        //Adding a link to the Yelp search result for the restaurant
+        console.log(website);
+        var webLink = $("<a>").attr({
+            "id":"url",
+            "href":website,
+            "target":"_blank"
+        });
+        
         //Restaurant image
         var displayImage = $("<img>").attr({
             "src": photo,
@@ -237,12 +250,15 @@ $(document).ready(function () {
             readOnly: true,
             score: rating,
             path: "assets/images"
-        })
+        });
 
-        //Adding button
+        //Select a date header
+        var selectDateHeader =  $("<h6>").text("Select Date");
+
+        //Button to add a date
         var addDateButton = $("<button>").attr({
             "type": "button",
-            "class": "add-date btn btn-primary btn-sm",
+            "class": "add-date btn btn-info btn-sm",
             "id": id
         });
         addDateButton.text("Add Date");
@@ -252,8 +268,8 @@ $(document).ready(function () {
             "type": "text",
         });
 
-        //adding date to date input field
-        datePicker.val(date);
+        //adding date to date input field on refresh
+		datePicker.val(date);
 
         var deleteRestaurant = $("<button>").attr({
             "id": "remove-restaurant",
@@ -262,12 +278,15 @@ $(document).ready(function () {
             "fid": id
         });
 
-        //Putting together the card       
-        var cardColumn = $("<div>").addClass("col-sm-3", displayName);
+        //Putting together the restaurant card       
+        webLink.append(displayImage);
+        var cardColumn = $("<div>").addClass("col-sm-3");
         var card = $("<div>").addClass("card h-100");
         var cardBlock = $("<div>").addClass("card-block");
         $(".row").prepend(cardColumn);
-        card.append(displayImage).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(datePicker).append(addDateButton).append(deleteRestaurant);
+        card.append(webLink).append(displayName).append(addressHeader).append(displayAddress).append(phoneHeader).append(displayPhone).append(ratingHeader).append(displayRating).append(selectDateHeader).append(datePicker).append(addDateButton).append(deleteRestaurant);
+
+
         card.prependTo(cardColumn);
     } //end of renderCards function
 
