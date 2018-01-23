@@ -251,10 +251,10 @@ ul.ui-autocomplete {
 
 
 /*  Small devices (landscape phones, 576px and up)*/
-@media (min-width: 576px) { 
+@media (max-width: 576px) { 
 
-  h1.display-3 {
-    font-size: 2rem;
+  .display-3 {
+    font-size: 3rem;
   }
   
  }

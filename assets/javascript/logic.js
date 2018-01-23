@@ -24,11 +24,7 @@ var database = firebase.database();
  $('#myModal').on('shown.bs.modal', function() {
     $('#myInput').focus()
  })
- 
 
-$(document).ready(function () {
-  
-     // $("#myModal").modal();
 
 $(document).ready(function () {
     //Submit button click event 
@@ -150,8 +146,8 @@ $(document).ready(function () {
             sv.dbPhoneNumber,
             sv.dbRating,
             sv.dbWebsite,
-			      dateVar
-        );
+			dateVar
+        )
 
         $(function () {
             $(".datepicker").datepicker();

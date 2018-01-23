@@ -46,6 +46,3 @@ This web application is intended for a discerning foodie who is serious about se
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* TBD
