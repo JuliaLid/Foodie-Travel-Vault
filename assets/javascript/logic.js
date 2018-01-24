@@ -276,7 +276,7 @@ $(document).ready(function () {
 
         //Putting together the restaurant card       
         webLink.append(displayImage);
-        var cardColumn = $("<div>").addClass("col-sm-3");
+        var cardColumn = $("<div>").addClass("col-sm-6 col-md-3");
         var card = $("<div>").addClass("card h-100");
         var cardBlock = $("<div>").addClass("card-block");
         $(".row").prepend(cardColumn);

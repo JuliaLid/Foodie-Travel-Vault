@@ -14,6 +14,7 @@ body {
   margin-bottom: 1rem;
   background-color: #fff;
   background-image: url("../images/jumbotron.jpeg");
+  /*background-size: 100% 100%;*/
   background-position: center bottom;
   position: relative;
 }
@@ -107,7 +108,7 @@ ul {
 
 .card-img-top {
 max-width: 100%;
-height: auto;
+max-height: 100%
 }
 
 .card:hover {
@@ -163,7 +164,7 @@ button.add-date {
   color: #033C73;
 }
 
-.col-sm-3 {
+.col-sm-6 {
   margin-bottom: 2rem;
   max-width: 100%;
 }
@@ -259,6 +260,33 @@ ul.ui-autocomplete {
 
   .display-3 {
     font-size: 3rem;
+    margin-top: 2rem;
   }
   
+  .form-inline .form-control {
+  width: 90%;
+}
+
+.card-title {
+  font-size: 2.5rem;
  }
+
+h4,h6 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: .5rem;
+}
+
+footer p {
+ font-size: 1rem;
+ text-align: left;
+ padding-left: .5rem;
+}
+
+footer a {
+  text-align: right;
+}
+
+}
