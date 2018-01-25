@@ -296,5 +296,6 @@ $(document).ready(function () {
         });
         //refresh browser to reload database
         window.location.reload();
+         $('html,body').scrollTop(0);
     });
 });
