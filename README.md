@@ -4,6 +4,9 @@
 ## Project Overview
 This web application is intended for a discerning foodie who is serious about selecting the best dining options prior to going on a trip. After completing the restaurant research during travel planning, you can add the selected restaurants to a vault. When your itinerary is finalized, simply add a date to visit each restaurant that works best with your schedule. You can remove the restaurant from the vault at any time. 
 
+## Deployed App
+[Foodie Travel Vault](https://julialid.github.io/Foodie-Travel-Vault/) 
+
 ## Requirements
 * Use at least two APIs
 * Use AJAX to pull data
